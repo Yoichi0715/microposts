@@ -12,5 +12,7 @@ class User < ActiveRecord::Base
   validates :location, allow_blank: true, 
                        length: { minimum: 2, maximum: 20 }, 
                        on: :update
-  validates :age, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100} , presence: true
+  validates :age, allow_blank: true,
+                  numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100},
+                  on: :update
 end
