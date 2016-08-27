@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update]
   before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
+                                        :following, :followers]
 
   def show
     @user = User.find(params[:id])
@@ -35,6 +37,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def followings
+    @title = "followings"
+    @user = User.find(params[:id])
+    @users = @user.following_users
+    render 'show_follow'
+  end
+  
+  def followers
+    @title = "followers"
+    @user  = User.find(params[:id])
+    @users = @user.follower_users
+    render 'show_follow'
+  end
+  
   private
 
   def user_params
