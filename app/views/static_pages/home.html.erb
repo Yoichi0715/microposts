@@ -12,6 +12,7 @@
      <h3>Micropost Feed</h3>
      <%= render 'shared/feed' %>
    </div>
+   <p><%#= paginate @users %></p>
   </div>
 <% else %>
   <div class="center jumbotron">
@@ -19,4 +20,5 @@
 
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
   </div>
+  
 <% end %>

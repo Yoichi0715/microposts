@@ -15,6 +15,7 @@
         <li style="margin-bottom: 5px;"><%= gravatar_for user, size: 20 %><%= link_to user.name, user %></li>
       <% end %>
     </ul>
-  </div>
+  </div>　
+  <ul><%= paginate @users %></ul>
 </div>
   

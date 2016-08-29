@@ -5,6 +5,9 @@
       <%= gravatar_for @user %>
       <%= @user.name %>
      </h1>
+     <ul>
+      <li>Location:　<%= @user.location.present? ? @user.location : "No-Data" %></li>
+     </ul>
     </section>
     <%= render 'link_btn' %>
   </aside>
@@ -16,9 +19,5 @@
         <%= render @microposts %>
       </ol>
     <% end %>
-  </div>
+    <%= paginate @users %>
 </div>
-
-<ul>
-  <li>Location:　<%= @user.location.present? ? @user.location : "No-Data" %></li>
-</ul>
