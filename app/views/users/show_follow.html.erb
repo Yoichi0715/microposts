@@ -14,8 +14,8 @@
       <% @users.each do |user| %>
         <li style="margin-bottom: 5px;"><%= gravatar_for user, size: 20 %><%= link_to user.name, user %></li>
       <% end %>
+      <%= paginate @users %>
     </ul>
   </div>　
-  <ul><%= paginate @users %></ul>
 </div>
   

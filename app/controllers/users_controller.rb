@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_params, only: [:show, :edit, :update]
+  before_action :set_params, only: [:show, :edit, :update, :followings, :followers]
   before_action :correct_user, only: [:edit, :update]
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
                                         :following, :followers]
 
   def show
-    @user = User.find(params[:id])
-    @microposts = @user.microposts.order(created_at: :desc)
-    @users = User.page(params[:page])
+    @microposts = @user.microposts.order(created_at: :desc).page(params[:page])
   end
    
   def new
@@ -25,11 +23,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
  
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "UPdate Profile"
       redirect_to @user
@@ -40,17 +36,13 @@ class UsersController < ApplicationController
 
   def followings
     @title = "followings"
-    @user = User.find(params[:id])
-    @users = @user.following_users
-    @users = User.page(params[:page])
+    @users = @user.following_users.page(params[:page])
     render 'show_follow'
   end
   
   def followers
     @title = "followers"
-    @user  = User.find(params[:id])
-    @users = @user.follower_users
-    @users = User.page(params[:page])
+    @users = @user.follower_users.page(params[:page])
     render 'show_follow'
   end
   
@@ -67,5 +59,12 @@ class UsersController < ApplicationController
 
   def correct_user
     redirect_to root_path if @user != current_user
+  end
+  
+  def favorite
+    @title = 'Favorite Tweets'
+    @tweet = current_user.tweets.bulid
+    @feed_tweets = current_user.favorite_tweets.paginate(page: params[:page])
+    render template:'about/index'
   end
 end

@@ -47,4 +47,7 @@ class User < ActiveRecord::Base
     Micropost.where(user_id: following_user_ids + [self.id])
   end  
   
+  #お気に入り
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_microposts,  through: :favorites, source: :micropost
 end

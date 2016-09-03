@@ -9,4 +9,9 @@
                                        data: { confirm: "You sure?" } %>
     <% end %>
   </span>
+  <% if micropost.favorited_by?(current_user) %>
+    <%= link_to "Release Favorites", micropost_favorites_path(micropost), method: :delete %>
+  <% else %>
+    <%= link_to "Add Favorites", micropost_favorites_path(micropost), method: :post %>
+  <% end %>
 </li>
