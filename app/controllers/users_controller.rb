@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_params, only: [:show, :edit, :update, :followings, :followers]
+  before_action :set_params, only: [:show, :edit, :update, :followings, :followers, :favorites]
   before_action :correct_user, only: [:edit, :update]
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
                                         :following, :followers]
@@ -44,6 +44,10 @@ class UsersController < ApplicationController
     @title = "followers"
     @users = @user.follower_users.page(params[:page])
     render 'show_follow'
+  end
+  
+  def favorites
+    @microposts = @user.favorite_microposts.page(params[:page])
   end
   
   private

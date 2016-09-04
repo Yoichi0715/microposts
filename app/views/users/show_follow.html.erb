@@ -6,6 +6,10 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+     <ul>
+      <li>Location:　<%= @user.location.present? ? @user.location : "No-Data" %></li>
+      <li>age: <%=@user.age.present? ? @user.age : "No-data" %></li>
+     </ul>
     </section>
     <%= render 'link_btn' %>
   </aside>
